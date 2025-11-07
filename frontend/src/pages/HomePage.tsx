@@ -8,6 +8,7 @@ import {
   CloudQueue as CloudIcon,
   Router as RouterIcon,
   Description as DocsIcon,
+  GitHub as GitHubIcon,
 } from "@mui/icons-material";
 import { Link as RouterLink } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
@@ -79,6 +80,18 @@ const HomePage = () => {
                   >
                     权限配置
                   </Button>
+                  <Button
+                    component="a"
+                    href="https://github.com/NekroAI/nekro-endpoint"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="outlined"
+                    size="large"
+                    startIcon={<GitHubIcon />}
+                    sx={{ px: 4, py: 1.5 }}
+                  >
+                    开源仓库
+                  </Button>
                 </>
               ) : (
                 <>
@@ -100,6 +113,18 @@ const HomePage = () => {
                     sx={{ px: 4, py: 1.5 }}
                   >
                     使用文档
+                  </Button>
+                  <Button
+                    component="a"
+                    href="https://github.com/NekroAI/nekro-endpoint"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="outlined"
+                    size="large"
+                    startIcon={<GitHubIcon />}
+                    sx={{ px: 4, py: 1.5 }}
+                  >
+                    开源仓库
                   </Button>
                 </>
               )}
