@@ -157,4 +157,8 @@ ENCRYPTION_KEY=your_generated_256_bit_key_in_hex
 
 # 应用基础 URL（替换为您的实际域名）
 APP_BASE_URL=https://your-app-name.pages.dev
+
+# GitHub OAuth 配置
+GITHUB_CLIENT_ID=your_github_client_id
+GITHUB_CLIENT_SECRET=your_github_client_secret
 ```

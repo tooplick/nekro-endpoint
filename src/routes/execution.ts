@@ -153,14 +153,10 @@ app.all("/e/:username/*", async (c) => {
     }
 
     case "proxy": {
-      const { targetUrl, pathMapping, headers = {}, removeHeaders = [], timeout = 10000 } = config;
+      const { targetUrl, headers = {}, removeHeaders = [], timeout = 10000 } = config;
 
-      // 构建目标 URL
-      let finalUrl = targetUrl;
-      if (pathMapping) {
-        // 简单的路径映射处理
-        finalUrl = targetUrl.replace(/\/$/, "") + "/" + pathMapping;
-      }
+      // 直接使用目标 URL，不再进行路径映射处理
+      const finalUrl = targetUrl;
 
       // 准备请求头
       const proxyHeaders: Record<string, string> = {

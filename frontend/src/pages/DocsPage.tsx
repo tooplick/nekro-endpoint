@@ -336,8 +336,17 @@ proxies:
                 </Typography>
               </Box>
               <Typography variant="body2" color="text.secondary" paragraph>
-                转发请求到目标 URL，支持自定义请求头和路径映射，适用于单文件代理、API 转发等场景。
+                转发请求到目标 URL，支持自定义请求头，适用于单文件代理、API 转发、资源加速等场景。
               </Typography>
+
+              <Alert severity="info" sx={{ mb: 2 }}>
+                <Typography variant="body2" sx={{ fontWeight: 600 }} gutterBottom>
+                  💡 设计说明
+                </Typography>
+                <Typography variant="body2">
+                  每个代理端点对应一个<strong>固定的目标 URL</strong>。如需代理多个资源，请为每个资源创建独立端点。
+                </Typography>
+              </Alert>
 
               <Alert severity="success" sx={{ mb: 2 }}>
                 <Typography variant="subtitle2" sx={{ fontWeight: 600 }} gutterBottom>
@@ -380,14 +389,11 @@ proxies:
                   />
                 </ListItem>
                 <ListItem>
-                  <ListItemText primary="路径映射" secondary="保持默认的 ${path} 即可（用于简单代理）" />
-                </ListItem>
-                <ListItem>
                   <ListItemText primary="超时时间" secondary="15000 毫秒（15秒）" />
                 </ListItem>
                 <ListItem>
                   <ListItemText
-                    primary="请求头"
+                    primary="请求头（可选）"
                     secondary="点击「添加」按钮，添加 Header：Accept = application/vnd.github+json"
                   />
                 </ListItem>
@@ -422,7 +428,7 @@ proxies:
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                    配置参数（将 API Key 隐藏在目标 URL 中）：
+                    将 API Key 直接包含在目标 URL 中，客户端无需知道密钥：
                   </Typography>
                   <List dense sx={{ mb: 2 }}>
                     <ListItem>
@@ -430,9 +436,6 @@ proxies:
                         primary="目标 URL"
                         secondary="https://api.weatherapi.com/v1/current.json?key=your-api-key&q=Beijing"
                       />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText primary="路径映射" secondary="保持默认 ${path}" />
                     </ListItem>
                   </List>
                   <Typography variant="body2" color="text.secondary">
@@ -457,9 +460,6 @@ proxies:
                       <ListItemText primary="目标 URL" secondary="https://example.com/images/avatar.jpg" />
                     </ListItem>
                     <ListItem>
-                      <ListItemText primary="路径映射" secondary="保持默认 ${path}" />
-                    </ListItem>
-                    <ListItem>
                       <ListItemText primary="超时时间" secondary="20000 毫秒（图片可能较大）" />
                     </ListItem>
                   </List>
@@ -471,42 +471,16 @@ proxies:
 
               <Divider sx={{ my: 3 }} />
 
-              <Typography variant="subtitle2" gutterBottom sx={{ fontWeight: 600 }}>
-                📘 路径映射（Path Mapping）说明
-              </Typography>
-              <Typography variant="body2" color="text.secondary" paragraph>
-                路径映射用于控制最终请求的 URL 构造方式，默认值为 <code>${"{path}"}</code>（代表端点自身的路径）。
-              </Typography>
-              <Typography variant="body2" color="text.secondary" gutterBottom>
-                <strong>常见使用场景：</strong>
-              </Typography>
-              <List dense>
-                <ListItem>
-                  <ListItemText primary="简单代理（推荐）" secondary="保持默认 ${path}，直接将请求转发到目标 URL" />
-                </ListItem>
-                <ListItem>
-                  <ListItemText
-                    primary="URL 路径转换"
-                    secondary={`例如：目标 URL 是 https://api.example.com，路径映射设为 /v2${"{path}"}，则最终请求 https://api.example.com/v2/your-endpoint-path`}
-                  />
-                </ListItem>
-              </List>
-              <Alert severity="info" sx={{ mt: 2 }}>
-                <Typography variant="body2">
-                  <strong>提示：</strong>大多数情况下使用默认的 <code>${"{path}"}</code> 即可满足需求。
-                </Typography>
-              </Alert>
-
-              <Alert severity="warning" sx={{ mt: 2 }}>
+              <Alert severity="warning">
                 <Typography variant="body2" sx={{ fontWeight: 600 }} gutterBottom>
-                  ⚠️ 路径匹配说明
+                  ⚠️ 使用说明
                 </Typography>
                 <Typography variant="body2">
-                  • 每个端点路径必须<strong>精确匹配</strong>访问路径
-                  <br />• 不支持通配符，如 <code>/gh-raw/*</code> 的写法无效
-                  <br />
-                  • 适用于代理单个 URL 或固定路径的 API
-                  <br />• 如需代理多个路径，请为每个路径创建独立端点
+                  • 每个代理端点对应一个<strong>固定的目标 URL</strong>
+                  <br />• 端点路径与目标 URL 无直接关系，仅作为访问标识
+                  <br />• 不支持通配符或动态路径匹配
+                  <br />• 如需代理多个 URL，请为每个 URL 创建独立端点
+                  <br />• 适合代理固定资源：API 端点、文件、图片等
                 </Typography>
               </Alert>
             </CardContent>

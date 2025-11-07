@@ -185,8 +185,7 @@ export function EndpointsPage() {
             }
           : newEndpointType === "proxy"
             ? {
-                targetUrl: "https://example.com/content/xxx",
-                pathMapping: "${path}",
+                targetUrl: "https://example.com/api/data",
                 headers: {},
                 removeHeaders: [],
                 timeout: 10000,

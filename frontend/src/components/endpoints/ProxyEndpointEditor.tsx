@@ -22,7 +22,6 @@ interface ProxyEndpointEditorProps {
     path: string;
     config: {
       targetUrl: string;
-      pathMapping?: string;
       headers?: { [key: string]: string };
       removeHeaders?: string[];
       timeout?: number;
@@ -33,7 +32,6 @@ interface ProxyEndpointEditorProps {
 
 export function ProxyEndpointEditor({ endpoint, onSave }: ProxyEndpointEditorProps) {
   const [targetUrl, setTargetUrl] = useState(endpoint.config.targetUrl || "");
-  const [pathMapping, setPathMapping] = useState(endpoint.config.pathMapping || "${path}");
   const [headers, setHeaders] = useState<Array<{ key: string; value: string }>>(
     Object.entries(endpoint.config.headers || {}).map(([key, value]) => ({ key, value })),
   );
@@ -43,7 +41,6 @@ export function ProxyEndpointEditor({ endpoint, onSave }: ProxyEndpointEditorPro
 
   useEffect(() => {
     setTargetUrl(endpoint.config.targetUrl || "");
-    setPathMapping(endpoint.config.pathMapping || "${path}");
     setHeaders(Object.entries(endpoint.config.headers || {}).map(([key, value]) => ({ key, value })));
     setTimeout(endpoint.config.timeout || 10000);
     setHasChanges(false);
@@ -60,7 +57,6 @@ export function ProxyEndpointEditor({ endpoint, onSave }: ProxyEndpointEditorPro
       await onSave(endpoint.id, {
         config: {
           targetUrl,
-          pathMapping,
           headers: headersObj,
           removeHeaders: [],
           timeout,
@@ -103,27 +99,14 @@ export function ProxyEndpointEditor({ endpoint, onSave }: ProxyEndpointEditorPro
           <TextField
             fullWidth
             label="目标 URL"
-            placeholder="https://example.com"
+            placeholder="https://example.com/api/data"
             value={targetUrl}
             onChange={(e) => {
               setTargetUrl(e.target.value);
               setHasChanges(true);
             }}
             sx={{ mb: 2 }}
-            helperText="目标服务器的基础 URL"
-          />
-
-          <TextField
-            fullWidth
-            label="路径映射"
-            placeholder="${path}"
-            value={pathMapping}
-            onChange={(e) => {
-              setPathMapping(e.target.value);
-              setHasChanges(true);
-            }}
-            sx={{ mb: 2 }}
-            helperText="使用 ${path} 表示原始路径，例如: /api/${path}"
+            helperText="完整的目标资源 URL，每个端点对应一个固定的目标地址"
           />
 
           <TextField
