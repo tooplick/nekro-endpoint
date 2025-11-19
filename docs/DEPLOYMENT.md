@@ -124,7 +124,7 @@ pnpm db:migrate:prod
 #### 1. 连接 Git 仓库
 
 1. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/)
-2. 进入 **Workers & Pages** → **Pages**
+2. 进入 **Workers & Pages** → **Workers**
 3. 点击 **"Create a project"**
 4. 选择 **"Connect to Git"**
 5. 授权并选择你的 Git 仓库
