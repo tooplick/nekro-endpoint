@@ -31,7 +31,7 @@
         {
           "binding": "DB",
           "database_name": "YGKing_db",
-          "database_id": "9fb3ea34-3c0e-4e0f-8b4e-7187826400d6",
+          "database_id": "814376fc-8e95-4d50-9bbe-e2fce4a65cc7",
           "migrations_dir": "drizzle"
         }
       ],
